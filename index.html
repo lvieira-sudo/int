@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Financeiro Completo - Análise Detalhada 2024 vs 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-bg">
+    <div class="container mx-auto px-6 py-8 pb-16">
+        <!-- Header -->
+        <div class="text-center mb-8 animate-fade-in">
+            <h1 class="text-5xl font-bold mb-2 title-animation">🚨 Dashboard de Inadimplência</h1>
+            <p class="text-xl text-gray-600 animate-slide-up">Análise Completa de Pagamentos em Atraso e Recuperação - 2024 vs 2025</p>
+            <div class="mt-4 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg max-w-4xl mx-auto">
+                <div class="flex items-center">
+                    <div class="text-2xl mr-3">⚠️</div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-red-800">Relatório de Inadimplência</h3>
+                        <p class="text-red-700">Este dashboard monitora valores em aberto, pagamentos em atraso e estratégias de recuperação de crédito</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legenda Geral -->
+        <div class="mb-8 animate-slide-up">
+            <div class="chart-container rounded-xl p-6 shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">🚨 Legenda - Indicadores de Inadimplência</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                    <div class="legend-box legend-parcela">
+                        <strong>Valor Parcela:</strong> Valor total das mensalidades faturadas
+                    </div>
+                    <div class="legend-box legend-desconto">
+                        <strong>Desconto Bolsa:</strong> Reduções aplicadas (não afeta inadimplência)
+                    </div>
+                    <div class="legend-box legend-liquido">
+                        <strong>Valor Líquido:</strong> Valor real a ser cobrado dos alunos
+                    </div>
+                    <div class="legend-box legend-aberto bg-red-50">
+                        <strong>⚠️ Valor em Aberto (2024):</strong> <span class="text-red-700 font-semibold">INADIMPLÊNCIA ATIVA</span> - Valores não pagos
+                    </div>
+                    <div class="legend-box legend-antecip">
+                        <strong>Valor Rec. Antecipado:</strong> Pagamentos adiantados (situação positiva)
+                    </div>
+                    <div class="legend-box legend-vencto">
+                        <strong>Valor Rec. no Vencto:</strong> Pagamentos em dia (situação ideal)
+                    </div>
+                    <div class="legend-box legend-bolsa">
+                        <strong>Valor Bolsa (2024):</strong> Auxílios para reduzir inadimplência
+                    </div>
+                    <div class="legend-box legend-pago">
+                        <strong>Valor Total Pago:</strong> Recuperação efetiva de crédito
+                    </div>
+                    <div class="legend-box legend-atraso bg-red-50">
+                        <strong>🔴 Valor Rec. Atraso (2025):</strong> <span class="text-red-700 font-semibold">RECUPERAÇÃO DE INADIMPLÊNCIA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex justify-center mb-8 animate-slide-up">
+            <div class="bg-white rounded-lg p-1 shadow-lg">
+                <button onclick="showTab('overview')" id="tab-overview" class="tab-button active px-6 py-3 rounded-md font-medium">🚨 Inadimplência Geral</button>
+                <button onclick="showTab('detailed')" id="tab-detailed" class="tab-button px-6 py-3 rounded-md font-medium">📊 Detalhes por Curso</button>
+                <button onclick="showTab('comparison')" id="tab-comparison" class="tab-button px-6 py-3 rounded-md font-medium">🔄 Comparativo 2024x2025</button>
+                <button onclick="showTab('courses')" id="tab-courses" class="tab-button px-6 py-3 rounded-md font-medium">🎓 Análise por Curso</button>
+            </div>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview-tab" class="tab-content">
+            <!-- KPI Cards Principais -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-slide-up">
+                <div class="metric-card rounded-xl p-6 text-white" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-80">🚨 Inadimplência 2024</p>
+                            <p class="text-2xl font-bold metric-value">R$ 57.521</p>
+                            <p class="text-xs opacity-70">Valores em aberto</p>
+                        </div>
+                        <div class="text-3xl">⚠️</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card rounded-xl p-6 text-white" style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-80">🔄 Recuperação 2025</p>
+                            <p class="text-2xl font-bold metric-value">R$ 919.040</p>
+                            <p class="text-xs opacity-70">Pagamentos em atraso</p>
+                        </div>
+                        <div class="text-3xl">🔄</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card rounded-xl p-6 text-white" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-80">✅ Recuperado 2024</p>
+                            <p class="text-2xl font-bold metric-value">R$ 2.082.053</p>
+                            <p class="text-xs opacity-70">Total efetivamente pago</p>
+                        </div>
+                        <div class="text-3xl">✅</div>
+                    </div>
+                </div>
+                
+                <div class="metric-card rounded-xl p-6 text-white" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-80">🎯 Recuperado 2025</p>
+                            <p class="text-2xl font-bold metric-value">R$ 2.126.428</p>
+                            <p class="text-xs opacity-70">Total efetivamente pago</p>
+                        </div>
+                        <div class="text-3xl">🎯</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos Principais -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">🚨 Inadimplência: Faturado vs Recuperado</h3>
+                    <p class="text-sm text-gray-600 mb-4">Comparativo entre valores faturados e efetivamente recebidos</p>
+                    <canvas id="overviewChart" width="400" height="300"></canvas>
+                </div>
+                
+                <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">📊 Estratégias de Redução: Descontos e Bolsas</h3>
+                    <p class="text-sm text-gray-600 mb-2">Auxílios concedidos para prevenir inadimplência</p>
+                    
+                    <!-- Legenda com valores exatos -->
+                    <div class="bg-gray-50 rounded-lg p-4 mb-4 grid grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-4 h-4 bg-red-500 rounded"></div>
+                            <div>
+                                <span class="text-sm font-medium text-gray-700">2024:</span>
+                                <span class="text-sm font-bold text-red-600" id="discount2024Value">R$ 2.855.752,39</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-4 h-4 bg-red-400 rounded"></div>
+                            <div>
+                                <span class="text-sm font-medium text-gray-700">2025:</span>
+                                <span class="text-sm font-bold text-red-500" id="discount2025Value">R$ 3.254.239,62</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <canvas id="discountChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Tab -->
+        <div id="detailed-tab" class="tab-content hidden">
+            <div class="grid grid-cols-1 gap-8 mb-8">
+                <!-- Tabela Detalhada 2024 -->
+                <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">📊 Métricas Detalhadas - 2024</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="text-left py-3 px-4 font-semibold">Curso</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Valor Parcela</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Desconto Bolsa</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Valor Líquido</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Valor em Aberto</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Rec. Antecipado</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Rec. no Vencto</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Valor Bolsa</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Total Pago</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detailed2024TableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tabela Detalhada 2025 -->
+                <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">📊 Métricas Detalhadas - 2025</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b-2 border-gray-200">
+                                    <th class="text-left py-3 px-4 font-semibold">Curso</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Valor Parcela</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Desconto Bolsa</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Valor Líquido</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Rec. Antecipado</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Rec. no Vencto</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Rec. em Atraso</th>
+                                    <th class="text-right py-3 px-4 font-semibold">Total Pago</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detailed2025TableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Tab -->
+        <div id="comparison-tab" class="tab-content hidden">
+            <!-- Controles de Comparação -->
+            <div class="chart-container rounded-xl p-6 shadow-lg mb-8 animate-slide-up">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 md:mb-0">🔄 Comparativo Interativo</h3>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <label class="text-sm font-medium text-gray-700">Ano Base:</label>
+                            <select id="baseYear" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateComparison()">
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <label class="text-sm font-medium text-gray-700">Comparar com:</label>
+                            <select id="compareYear" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateComparison()">
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                        
+                        <button onclick="swapYears()" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            🔄 Inverter
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Indicadores de Comparação -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-blue-600 font-medium">Ano Base</p>
+                                <p class="text-2xl font-bold text-blue-800" id="baseYearDisplay">2024</p>
+                            </div>
+                            <div class="text-3xl">📊</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-purple-600 font-medium">Comparando com</p>
+                                <p class="text-2xl font-bold text-purple-800" id="compareYearDisplay">2025</p>
+                            </div>
+                            <div class="text-3xl">📈</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-green-600 font-medium">Variação Total</p>
+                                <p class="text-xl font-bold text-green-800" id="totalVariation">+2.13%</p>
+                            </div>
+                            <div class="text-3xl" id="variationIcon">📈</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Comparativo: Valores Totais Pagos</h3>
+                    <canvas id="comparisonChart" width="400" height="300"></canvas>
+                </div>
+                
+                <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Comparativo: Formas de Recebimento</h3>
+                    <canvas id="receivingChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+
+            <!-- Tabela Comparativa -->
+            <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Comparativo Detalhado por Métrica</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b-2 border-gray-200">
+                                <th class="text-left py-3 px-4 font-semibold">Métrica</th>
+                                <th class="text-right py-3 px-4 font-semibold" id="baseYearHeader">2024 (Base)</th>
+                                <th class="text-right py-3 px-4 font-semibold" id="compareYearHeader">2025 (Comparação)</th>
+                                <th class="text-right py-3 px-4 font-semibold">Variação</th>
+                                <th class="text-right py-3 px-4 font-semibold">Diferença</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparisonTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Tab -->
+        <div id="courses-tab" class="tab-content hidden">
+            <div class="grid grid-cols-1 gap-8 mb-8">
+                <div class="chart-container rounded-xl p-6 shadow-lg animate-slide-up">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Performance Detalhada por Curso</h3>
+                    <canvas id="performanceChart" width="800" height="400"></canvas>
+                </div>
+            </div>
+
+            <!-- Cards Detalhados dos Cursos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="courseCards">
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
